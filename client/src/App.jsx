@@ -26,9 +26,6 @@ export default function App() {
           <Route path="/how-it-works" element={<HowItWorks />} />
         </Routes>
       </main>
-      <footer className="footer">
-        CampusFind · GENS 202 · Ahmadu Bello University, Zaria
-      </footer>
     </div>
   );
 }
