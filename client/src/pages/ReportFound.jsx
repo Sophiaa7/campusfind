@@ -3,8 +3,32 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../api";
 
 const CATS = ["Electronics", "ID Cards", "Keys", "Books", "Bags & Wallets", "Other"];
-const LOCS = ["Faculty of Engineering", "Main Library", "Student Centre", "Hostel Area", "Other"];
-
+const LOCS = [
+  "Faculty of Engineering",
+  "Faculty of Physical Sciences",
+  "Faculty of Life Sciences",
+  "Faculty of Arts",
+  "Faculty of Education",
+  "Faculty of Social Sciences",
+  "Faculty of Environmental Design",
+  "Faculty of Veterinary Medicine",
+  "ABU Business School",
+  "Faculty of Agriculture",
+  "Faculty of Pharmaceutical Sciences",
+  "Faculty of Basic Medical Sciences",
+  "Faculty of Allied Health Sciences",
+  "Faculty of Clinical Sciences",
+  "Main Library",
+  "Student Centre",
+  "Sulieman Hostel",
+  "Amina Hostel",
+  "Ribadu Hostel",
+  "Ramat Hostel",
+  "Dangote Hostel",
+  "Donfodiyo Hostel",
+  "ICSA Hostel",
+  "Other",
+];
 export default function ReportFound() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
