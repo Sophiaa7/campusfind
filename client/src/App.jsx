@@ -10,9 +10,9 @@ export default function App() {
     <div className="app">
       <header className="header">
        <Link to="/" className="logo">
-  <span className="logo-mark">C</span>
-  CampusFind
-</Link>
+          <img src="/logo.jpg.png" alt="" className="logo-mark" />
+           CampusFind
+        </Link>
         <nav>
           <Link to="/report-lost">Lost</Link>
           <Link to="/report-found">Found</Link>
