@@ -9,7 +9,10 @@ export default function App() {
   return (
     <div className="app">
       <header className="header">
-        <Link to="/" className="logo">CampusFind</Link>
+       <Link to="/" className="logo">
+  <span className="logo-mark">C</span>
+  CampusFind
+</Link>
         <nav>
           <Link to="/report-lost">Lost</Link>
           <Link to="/report-found">Found</Link>
