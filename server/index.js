@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 const DB_PATH = path.join(__dirname, "data.json");
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "8mb" }));
 
 function loadDB() {
   if (!fs.existsSync(DB_PATH)) return { lost: [], found: [], matches: [] };
@@ -47,7 +47,7 @@ app.get("/api/stats", (_req, res) => {
 });
 
 app.post("/api/lost", (req, res) => {
-  const { category, dateLost, location, description, privateDetail, contact } = req.body;
+  const { category, dateLost, location, description, privateDetail, contact, image } = req.body;
   if (!category || !dateLost || !location || !description || !contact) {
     return res.status(400).json({ error: "Missing required fields" });
   }
@@ -59,6 +59,7 @@ app.post("/api/lost", (req, res) => {
     description,
     private_detail: privateDetail || "",
     contact,
+    image: image || "",
     status: "active",
     created_at: new Date().toISOString(),
   };
@@ -82,7 +83,7 @@ app.post("/api/lost", (req, res) => {
 });
 
 app.post("/api/found", (req, res) => {
-  const { category, dateFound, location, description, keptAt, contact } = req.body;
+  const { category, dateFound, location, description, keptAt, contact, image } = req.body;
   if (!category || !dateFound || !location || !description || !keptAt || !contact) {
     return res.status(400).json({ error: "Missing required fields" });
   }
@@ -94,6 +95,7 @@ app.post("/api/found", (req, res) => {
     description,
     kept_at: keptAt,
     contact,
+    image: image || "",
     status: "active",
     created_at: new Date().toISOString(),
   };
@@ -130,11 +132,14 @@ app.get("/api/matches", (_req, res) => {
         lost_category: lost.category,
         lost_location: lost.location,
         date_lost: lost.date_lost,
+        lost_image: lost.image || "",
         found_description: found.description,
         found_category: found.category,
         found_location: found.location,
         date_found: found.date_found,
         kept_at: found.kept_at,
+        found_image: found.image || "",
+        found_contact: found.contact,
       };
     })
     .filter(Boolean)
@@ -169,6 +174,7 @@ app.post("/api/demo", (_req, res) => {
         description: "Black Samsung Galaxy A54 with blue case",
         private_detail: "4821",
         contact: "0803xxx1234",
+        image: "",
         status: "active",
       },
       {
@@ -179,6 +185,7 @@ app.post("/api/demo", (_req, res) => {
         description: "ABU student ID card, Computer Science",
         private_detail: "2021/CS/045",
         contact: "aisha@student.abu.edu.ng",
+        image: "",
         status: "active",
       },
     ],
@@ -191,6 +198,7 @@ app.post("/api/demo", (_req, res) => {
         description: "Black phone with blue protective case",
         kept_at: "Security Post, Engineering",
         contact: "0705xxx9876",
+        image: "",
         status: "active",
       },
       {
@@ -201,6 +209,7 @@ app.post("/api/demo", (_req, res) => {
         description: "Keys with a red keychain",
         kept_at: "With me",
         contact: "0812xxx4567",
+        image: "",
         status: "active",
       },
       {
@@ -211,6 +220,7 @@ app.post("/api/demo", (_req, res) => {
         description: "Calculus textbook with handwritten notes",
         kept_at: "Library desk",
         contact: "library@abu.edu.ng",
+        image: "",
         status: "active",
       },
     ],
